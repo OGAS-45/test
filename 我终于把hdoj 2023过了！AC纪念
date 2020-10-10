@@ -1,0 +1,66 @@
+#include<stdio.h>
+
+int main()
+{
+	int m,n;
+	while(scanf("%d %d",&n,&m) != EOF){
+	int a[n][m];
+	for(int i = 0;i < n;i++){
+		for(int j = 0;j < m;j++){
+			scanf("%d",&a[i][j]);
+		}
+	}
+	
+	//第一行包含n个数据，表示n个学生的平均成绩
+	double avs;
+	int sum;
+	for(int i = 0;i < n;i++){
+		sum = 0;
+		for(int j = 0;j < m;j++){
+			sum += a[i][j];
+		}
+		avs = sum * 1.0 / m;
+		printf("%.2lf",avs);
+		if(i == n - 1){
+			printf("\n");
+		}else{
+			printf(" ");
+		}
+	}
+	//第二行包含m个数据，表示m门课的平均成绩，结果保留两位小数
+	double avx;
+	double s[m];//设置m门课平均分数组 
+	//int sum;
+	for(int i = 0;i < m;i++){
+		sum = 0;
+		for(int j = 0;j < n;j++){
+			sum+=a[j][i];
+		}
+		avx = sum * 1.0 / n;
+		printf("%.2lf",avx);
+		s[i] = avx;
+		if(i == m - 1){
+			printf("\n");
+		}else{
+			printf(" ");
+		}
+	}
+	
+	//第三行是一个整数，表示该班级中各科成绩均大于等于平均成绩的学生数量。
+	int cal = 0;
+	for(int i = 0;i < n;i++){
+		int yes = 1;
+		for(int j = 0;j < m;j++){
+			if(a[i][j] < s[j]){
+			yes = 0;
+			break; 
+		}
+	}
+		if(yes == 1){
+		cal++;
+	}
+}
+	printf("%d\n\n",cal);
+}
+	return 0;
+}
